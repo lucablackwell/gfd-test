@@ -1,0 +1,11 @@
+#!/bin/bash
+#echo "** $HOSTDEF"
+#if [ -z "$HOSTDEF" ]; then
+#        echo "\$HOSTDEF not set; aborting."
+#        exit 1
+#fi
+
+if [ -z "${UPDATEPKGS}" ]; then
+        echo "\$UPDATEPKGS not set; aborting."
+        exit 1
+fi

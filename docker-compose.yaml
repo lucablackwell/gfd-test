@@ -1,0 +1,109 @@
+version: "3.5"
+
+services:
+  console:
+    build:
+      context: ./containers/
+      dockerfile: ./console/Dockerfile 
+      args:
+        NODEVERSION: ${NODEVERSION}
+        UPDATEPKGS: ${UPDATEPKGS}
+    container_name: ${APPNAME:?err}-console
+    environment:
+      - APPNAME
+      - APPNAMELONG
+      - WILDCARDCERT
+      - WWWDOMAIN
+      - HTACCESS
+      - HTUSER
+      - HTPASS
+      - ENVSET
+      - HOSTUID
+      - HOSTGID
+      - NODEVERSION
+      - DATABASENAME
+      - DATABASEUSER
+      - DEBUGMODE
+    volumes:
+      - ./storage/app:/storage/app
+      - ./storage/database:/storage/database
+      - ./storage/certs:/storage/certs
+    
+  web:
+    build:
+      context: ./containers/
+      dockerfile: ./web/Dockerfile 
+      args:
+        UPDATEPKGS: ${UPDATEPKGS}
+    ports:
+      - "${BINDHTTP}"
+      - "${BINDHTTPS}"
+    container_name: ${APPNAME:?err}-web
+    environment:
+      - APPNAME
+      - APPNAMELONG
+      - WILDCARDCERT
+      - WWWDOMAIN
+      - HTACCESS
+      - HTUSER
+      - HTPASS
+      - ENVSET
+      - HOSTUID
+      - HOSTGID
+      - NODEVERSION
+      - DATABASENAME
+      - DATABASEUSER
+      - NGINXREDIRECTHTTP
+      - NGINXREDIRECTAPEX
+      - DEBUGMODE
+    volumes:
+      - ./storage/app:/storage/app
+      - ./storage/certs:/storage/certs
+      - ./storage/app:/var/www/html
+      - ./storage/logs/nginx:/var/log/nginx
+    depends_on:
+      - console
+
+  redis:
+    build:
+      context: ./containers/
+      dockerfile: ./redis/Dockerfile 
+      args:
+        UPDATEPKGS: ${UPDATEPKGS}
+    ports:
+      - "${BINDREDIS}"
+    container_name: ${APPNAME:?err}-redis
+    environment:
+      - ENVSET
+      - HOSTUID
+      - HOSTGID
+      - UPDATEPKGS
+      - DEBUGMODE
+  db:
+    build:
+      context: ./containers/
+      dockerfile: ./mysql/Dockerfile 
+      args:
+        UPDATEPKGS: ${UPDATEPKGS}
+    ports:
+      - "${BINDMYSQL}"
+    container_name: ${APPNAME:?err}-db
+    environment:
+      - ENVSET
+      - HOSTUID
+      - HOSTGID
+      - DATABASENAME
+      - DATABASEUSER
+      - DEBUGMODE
+    volumes:
+      - ./storage/database:/mysql
+      - ./storage/databasedumps:/mysqldump
+  
+  maildev:
+    container_name: ${APPNAME:?err}_maildev
+    image: maildev/maildev
+    restart: unless-stopped
+    ports:
+      - "1080:80"
+
+

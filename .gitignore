@@ -1,0 +1,6 @@
+storage/database
+.idea
+.env
+storage/app/vendor/
+storage/logs
+vendor/
