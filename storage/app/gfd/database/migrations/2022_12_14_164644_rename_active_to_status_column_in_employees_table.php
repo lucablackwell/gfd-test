@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->string('active')->change();
             $table->renameColumn('active', 'status');
         });
     }
@@ -28,7 +27,6 @@ return new class extends Migration
     {
         Schema::table('employees', function (Blueprint $table) {
             $table->renameColumn('status', 'active');
-            $table->boolean('active')->change();
         });
     }
 };

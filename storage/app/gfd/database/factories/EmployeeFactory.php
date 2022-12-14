@@ -19,7 +19,7 @@ class EmployeeFactory extends Factory
         return [
             'forename' => $this->faker->firstName($gender = null),
             'surname' => $this->faker->lastName,
-            'active' => $this->faker->boolean()
+            'status' => ($this->faker->boolean() ? 'Active' : 'Inactive')
         ];
     }
 }

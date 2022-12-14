@@ -31,13 +31,13 @@
                                 <option value="2">Department</option>
                             </select>
                         </div>
-                        <div class="form-check form-group">
-                            <input class="form-check-input" type="checkbox" value="1" name="active" id="active" {{ $employee['active'] ? 'checked' : ''}}>
-                            <label class="form-check-label" for="active">
-                                Active
-                            </label>
+                        <div class="form-group mb-3">
+                            <label for="status">Status</label>
+                            <select id="status" name="status" class="form-control" required>
+                                <option value="Active" {{ $employee->status == 'Active' ? 'selected' : '' }}>Active</option>
+                                <option value="Inactive" {{ $employee->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
+                            </select>
                         </div>
-                        <a href="{{ route('employee.index') }}"></a>
                         <button type="submit" class="btn btn-secondary">Save</button>
                     </form>
                 </div>

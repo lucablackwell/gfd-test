@@ -44,7 +44,7 @@
                                 <span class="">{{ $employee['department'] }}</span> {{--roperly functional when add departments --}}
                             </td>
                             <td>
-                                <span class="">{{ $employee['active'] == 1 ? 'Active' : 'Inactive'}}</span>
+                                <span class="">{{ $employee['status']}}</span>
                             </td>
                             <td>
                                 {{-- edit and delete button --}}

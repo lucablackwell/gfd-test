@@ -47,6 +47,7 @@ class EmployeeController extends Controller
             'forename' => 'string|required',
             'surname' => 'string|required',
             'department' => 'int|required',
+            'status' => 'string|required'
         ]);
 
 
@@ -54,7 +55,7 @@ class EmployeeController extends Controller
             'forename' => $request->post('forename'),
             'surname' => $request->post('surname'),
             'department' => $request->post('department'),
-            'active' => is_null($request->post('active')) ? false : true
+            'status' => $request->post('status')
         ]);
 
         return redirect()->back()->with('success', 'Employee has been updated.');
