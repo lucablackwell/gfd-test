@@ -1,5 +1,5 @@
 #Build via docker-compose for context/path to be correct
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
 MAINTAINER lee@leeblackwell.com
 
