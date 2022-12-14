@@ -39,7 +39,7 @@ class EmployeeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  Employee  $employee
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Employee $employee)
     {
@@ -47,15 +47,14 @@ class EmployeeController extends Controller
             'forename' => 'string|required',
             'surname' => 'string|required',
             'department' => 'int|required',
-            'active' => 'boolean|required'
         ]);
 
 
-        $treat->update([
+        $employee->update([
             'forename' => $request->post('forename'),
             'surname' => $request->post('surname'),
             'department' => $request->post('department'),
-            'active' => $request->post('active')
+            'active' => is_null($request->post('active')) ? false : true
         ]);
 
         return redirect()->back()->with('success', 'Employee has been updated.');
