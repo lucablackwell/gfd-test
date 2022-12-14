@@ -18,6 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->string('forename');
             $table->string('surname');
             $table->boolean('active');
+            $table->timestamps();
         });
     }
 
