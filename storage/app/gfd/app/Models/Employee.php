@@ -12,7 +12,12 @@ class Employee extends Model
     protected $fillable = [
         'forename',
         'surname',
-        //'department'
+        'department',
         'status'
     ];
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 }

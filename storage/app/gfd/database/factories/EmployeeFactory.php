@@ -19,7 +19,8 @@ class EmployeeFactory extends Factory
         return [
             'forename' => $this->faker->firstName($gender = null),
             'surname' => $this->faker->lastName,
-            'status' => ($this->faker->boolean() ? 'Active' : 'Inactive')
+            'status' => ($this->faker->boolean() ? 'Active' : 'Inactive'),
+            'department_id' => Department::inRandomOrder()->get()->first()->id
         ];
     }
 }
