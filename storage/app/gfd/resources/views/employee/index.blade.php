@@ -28,6 +28,7 @@
                                 <th>Name</th>
                                 <th>Department</th>
                                 <th>Status</th>
+                                <th>Last Updated</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -41,7 +42,10 @@
                                         <span>{{ $employee['department']['name'] }}</span>
                                     </td>
                                     <td>
-                                        <span>{{ $employee['status']}}</span>
+                                        <span>{{ $employee['status'] }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ $employee['updated_at']->diffForHumans() }}</span>
                                     </td>
                                     <td>
                                         <a href="{{ route('employee.edit', $employee['id']) }}" type="button" class="btn btn-secondary">
