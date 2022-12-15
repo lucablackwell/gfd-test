@@ -25,8 +25,7 @@
                     <table class="table table-sm table-nowrap card-table text-center table-hover">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Surname</th>
+                                <th>Name</th>
                                 <th>Department</th>
                                 <th>Status</th>
                                 <th>Actions</th>
@@ -36,10 +35,7 @@
                             @foreach($employees as $employee)
                                 <tr>
                                     <td>
-                                        <span>{{ $employee['forename'] }}</span>
-                                    </td>
-                                    <td>
-                                        <span>{{ $employee['surname'] }}</span>
+                                        <span>{{ $employee['forename'] . ' ' . $employee['surname'] }}</span>
                                     </td>
                                     <td>
                                         <span>{{ $employee['department']['name'] }}</span>
