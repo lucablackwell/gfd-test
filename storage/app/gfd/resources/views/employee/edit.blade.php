@@ -5,7 +5,6 @@
 @section('content')
 
 <div class="container">
-
     <div class="row justify-content-center">
         <div class="col-12 col-md-9">
             <div class="card">
@@ -25,10 +24,11 @@
                             <input type="text" class="form-control" id="surname" aria-describedby="surnameHelp" name="surname" value="{{ $employee->surname }}" required>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="department">Department</label>
-                            <select id="department" name="department" class="form-control" required>
-                                <option value="1">Department</option>
-                                <option value="2">Department</option>
+                            <label for="department_id">Department</label>
+                            <select id="department_id" name="department_id" class="form-control" required>
+                                @foreach($departments as $department)
+                                    <option value="{{ $department->id }}" {{ $department->id == $employee->department_id ? 'selected' : '' }}>{{ $department->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group mb-3">

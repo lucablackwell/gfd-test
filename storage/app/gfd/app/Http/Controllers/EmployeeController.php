@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\Department;
 
 class EmployeeController extends Controller
 {
@@ -15,10 +16,12 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        // add departments later
-        return view('employee.index', [
-            'employees' => $employees
-        ]);
+        $departments = Department::all();
+
+        return view('employee.index', compact(
+            'employees',
+            'departments'
+        ));
     }
 
     /**
@@ -29,9 +32,13 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
+        $departments = Department::all();
+        
         return view('employee.edit', compact(
-            'employee'
+            'employee',
+            'departments'
         ));
+        
     }
 
     /**
@@ -46,7 +53,7 @@ class EmployeeController extends Controller
         $request->validate([
             'forename' => 'string|required',
             'surname' => 'string|required',
-            'department' => 'int|required',
+            'department_id' => 'int|required',
             'status' => 'string|required'
         ]);
 
@@ -54,7 +61,7 @@ class EmployeeController extends Controller
         $employee->update([
             'forename' => $request->post('forename'),
             'surname' => $request->post('surname'),
-            'department' => $request->post('department'),
+            'department_id' => $request->post('department_id'),
             'status' => $request->post('status')
         ]);
 

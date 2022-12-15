@@ -35,19 +35,18 @@
                     @foreach($employees as $employee)
                         <tr>
                             <td>
-                                <span class="">{{ $employee['forename'] }}</span>
+                                <span>{{ $employee['forename'] }}</span>
                             </td>
                             <td>
-                                <span class="">{{ $employee['surname'] }}</span>
+                                <span>{{ $employee['surname'] }}</span>
                             </td>
                             <td>
-                                <span class="">{{ $employee['department'] }}</span> {{--roperly functional when add departments --}}
+                                <span>{{ $employee['department']['name'] }}</span>
                             </td>
                             <td>
-                                <span class="">{{ $employee['status']}}</span>
+                                <span>{{ $employee['status']}}</span>
                             </td>
                             <td>
-                                {{-- edit and delete button --}}
                                 <a href="{{ route('employee.edit', $employee['id']) }}" type="button" class="btn btn-secondary">
                                     Edit
                                 </a>
